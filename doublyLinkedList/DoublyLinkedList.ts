@@ -60,6 +60,25 @@ export class DoublyLinkedList {
     return this;
   }
 
+  find(searchValue: string | undefined) {
+    if (!searchValue || !this.head || !this.tail) {
+      return null;
+    }
+
+    let currentElem = this.head;
+
+    while (currentElem) {
+      if (currentElem.value === searchValue) {
+        return currentElem.value;
+      }
+      currentElem = currentElem.next!;
+    }
+
+    return null;
+  }
+
+
+
   /* Util methods */
   toArray() {
     const nodesArray = [];
@@ -79,7 +98,7 @@ export class DoublyLinkedList {
   }
 }
 
-const list = new DoublyLinkedList();
+// const list = new DoublyLinkedList();
 //
 // list.prepend('a').prepend('b').prepend('c');
 //

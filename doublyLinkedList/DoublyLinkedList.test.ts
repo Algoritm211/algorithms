@@ -31,4 +31,14 @@ describe('Testing DoubleLinkedList', () => {
     expect(list.head?.toString()).toBe('d');
     expect(list.tail?.toString()).toBe('c')
   });
+
+  it('Find function works good', () => {
+    const list = init();
+
+    list.append('d').append('e').append('g');
+    expect(list.find('d')).toBe('d');
+    expect(list.find('e')).toBe('e');
+    expect(list.find('m')).toBe(null);
+  });
+
 });
