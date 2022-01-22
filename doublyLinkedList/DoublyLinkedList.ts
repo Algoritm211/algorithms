@@ -60,6 +60,41 @@ export class DoublyLinkedList {
     return this;
   }
 
+  delete(valueToDelete: string) {
+    if (!this.head) {
+      return null;
+    }
+
+    let deleteNode = null;
+
+    // If we want multiple delete from head
+    while (this.head && this.head.value === valueToDelete) {
+      deleteNode = this.head.value;
+      this.head = this.head?.next;
+      this.head!.previous = null;
+    }
+
+    let currentNode = this.head;
+
+    while (currentNode) {
+      if (currentNode.next?.value === valueToDelete) {
+        deleteNode = currentNode.next.value;
+        if (currentNode.next === this.tail) {
+          this.tail = currentNode;
+          currentNode.next = null;
+        }
+        if (currentNode && currentNode.next && currentNode.next.next) {
+          currentNode.next.next.previous = currentNode;
+          currentNode.next = currentNode.next.next;
+        }
+      } else {
+        currentNode = currentNode.next;
+      }
+    }
+
+    return deleteNode;
+  }
+
   find(searchValue: string | undefined) {
     if (!searchValue || !this.head || !this.tail) {
       return null;
@@ -76,8 +111,6 @@ export class DoublyLinkedList {
 
     return null;
   }
-
-
 
   /* Util methods */
   toArray() {
@@ -98,8 +131,10 @@ export class DoublyLinkedList {
   }
 }
 
-// const list = new DoublyLinkedList();
-//
-// list.prepend('a').prepend('b').prepend('c');
-//
-// console.log(list.toArray())
+const list = new DoublyLinkedList();
+
+list.append('a').append('b').append('c');
+
+list.delete('a');
+
+// console.log(list.toArray().toString())

@@ -41,4 +41,43 @@ describe('Testing DoubleLinkedList', () => {
     expect(list.find('m')).toBe(null);
   });
 
+  it('Delete function works good', () => {
+    const list = init();
+
+    // Deleting not-existing element
+    expect(list.delete('255')).toBe(null);
+    expect(list.toString()).toBe('a,b,c');
+
+    expect(list.delete('c')).toBe('c');
+    expect(list.tail?.value).toBe('b');
+    expect(list.tail?.previous?.value).toBe('a');
+    expect(list.head?.next?.value).toBe('b');
+
+    expect(list.delete('a')).toBe('a');
+    expect(list.tail?.value).toBe('b');
+    expect(list.head?.value).toBe('b');
+    expect(list.head?.previous).toBe(null);
+    expect(list.head?.next).toBe(null);
+
+  });
+
+  it('Multiply delete in DoublyLinkedList works good', () => {
+    const list = init();
+
+    list.append('c').append('d').append('d')
+    list.prepend('a').prepend('a').prepend('a')
+
+    list.delete('a')
+    expect(list.toString()).toBe('b,c,c,d,d')
+    expect(list.head?.value).toBe('b')
+
+    list.delete('c')
+    expect(list.toString()).toBe('b,d,d')
+    expect(list.head?.next?.toString()).toBe('d');
+
+    list.delete('d')
+    expect(list.toString()).toBe('b')
+    expect(list.head?.next).toBe(null);
+    expect(list.tail?.value).toBe('b');
+  });
 });
