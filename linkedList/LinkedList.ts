@@ -29,6 +29,7 @@ export class LinkedList {
     if (!this.head || !this.tail) {
       this.head = newNode;
       this.tail = newNode;
+      return this;
     }
 
     this.tail.next = newNode;
