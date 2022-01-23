@@ -119,6 +119,24 @@ export class LinkedList {
     return this;
   }
 
+  deleteHead() {
+    let deletedHead = null;
+    if (!this.head) {
+      return null;
+    }
+
+    deletedHead = this.head;
+    if (!this.head?.next) {
+      this.head = null;
+      this.tail = null;
+      return deletedHead;
+    }
+
+    this.head = this.head.next;
+
+    return deletedHead;
+  }
+
   /* Util methods */
 
   toArray() {

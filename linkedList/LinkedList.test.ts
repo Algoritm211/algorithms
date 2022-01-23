@@ -100,4 +100,17 @@ describe('LinkedList test', () => {
     expect(list.toString()).toBe('1,2,42,3,777');
     expect(list.tail?.value).toBe('777');
   })
+
+  it('DeleteHead method works good', () => {
+    const list = init();
+
+    expect(list.deleteHead()?.value).toBe('1')
+    expect(list.toString()).toBe('2,3')
+    expect(list.head?.value).toBe('2');
+    expect(list.head?.next?.value).toBe('3');
+
+    const emptyList = new LinkedList();
+
+    expect(emptyList.deleteHead()?.value).toBe(undefined);
+  });
 });
