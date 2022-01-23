@@ -80,4 +80,15 @@ describe('Testing DoubleLinkedList', () => {
     expect(list.head?.next).toBe(null);
     expect(list.tail?.value).toBe('b');
   });
+
+  it('Reverse function works good', () => {
+    const list = init();
+
+    list.append('d');
+    list.reverse();
+
+    expect(list.toString()).toBe('d,c,b,a');
+    expect(list.head?.value).toBe('d');
+    expect(list.tail?.value).toBe('a');
+  })
 });

@@ -112,6 +112,28 @@ export class DoublyLinkedList {
     return null;
   }
 
+  reverse() {
+    let currentNode = this.head;
+    let prevNode = null;
+    let nextNode = null;
+
+    while (currentNode) {
+      prevNode = currentNode.previous;
+      nextNode = currentNode.next;
+
+      currentNode.next = prevNode;
+      currentNode.previous = nextNode;
+
+      prevNode = currentNode;
+      currentNode = nextNode;
+    }
+
+    this.tail = this.head;
+    this.head = prevNode;
+
+    return this;
+  }
+
   /* Util methods */
   toArray() {
     const nodesArray = [];
@@ -131,10 +153,12 @@ export class DoublyLinkedList {
   }
 }
 
-const list = new DoublyLinkedList();
+// const list = new DoublyLinkedList();
+//
+// list.append('a').append('b').append('c').append('d').reverse();
+//
+// console.log(list.toArray())
+//
+// console.log('HEAD', list.head?.value);
+// console.log('TAIL', list.tail?.value);
 
-list.append('a').append('b').append('c');
-
-list.delete('a');
-
-// console.log(list.toArray().toString())
