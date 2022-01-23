@@ -144,7 +144,7 @@ export class LinkedList {
     let currentElem = this.head
 
     while (currentElem) {
-      linkedListElems.push(currentElem);
+      linkedListElems.push(currentElem.value);
       currentElem = currentElem.next;
     }
 
@@ -152,6 +152,6 @@ export class LinkedList {
   }
 
   toString() {
-    return this.toArray().map((elem) => elem.value).toString();
+    return this.toArray().toString();
   }
 }
