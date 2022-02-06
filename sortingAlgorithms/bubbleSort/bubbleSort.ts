@@ -1,4 +1,6 @@
-
+/**
+ * Complexity - O(n^2)
+ */
 const bubbleSort = (initialArray: Array<number>) => {
   // Making copy of existing array. No mutation
   const array = initialArray.slice();
