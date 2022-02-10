@@ -1,5 +1,6 @@
-
-
+/**
+ * Complexity - O(n log(n))
+ */
 const mergeSort = (array: Array<number>): Array<number> => {
   if (array.length < 2) {
     return array;
