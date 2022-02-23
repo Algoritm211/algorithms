@@ -1,5 +1,5 @@
 
-const arr = [1, 5, 10, 14, -6, -12, -3, 19];
+const arr = [5, 1, 10, 14, -6, -12, -3, 19];
 
 /**
  * Complexity - O(n^2)
@@ -7,17 +7,17 @@ const arr = [1, 5, 10, 14, -6, -12, -3, 19];
 const insertionSort = (initialArray: Array<number>) => {
   const array = [...initialArray];
 
-  for (let i = 0; i < array.length; i++) {
-    let n = i;
-    let temp = 0;
+  for (let j = 1; j < array.length; j++) {
+    const key = array[j]
 
-    while (n > 0 && array[n] < array[n - 1]) {
-      temp = array[n]
-      array[n] = array[n - 1]
-      array[n - 1] = temp;
-      n -= 1;
+    let i = j - 1;
+
+    while (i >= 0 && array[i] > key) {
+      array[i + 1] = array[i];
+      i -= 1;
     }
 
+    array[i + 1] = key;
   }
 
   return array;
