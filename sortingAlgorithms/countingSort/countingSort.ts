@@ -7,7 +7,7 @@ const countingSort = (arr: Array<number>, min: number, max: number) => {
   const resultArr: Array<number> = [];
   const helperArr: Array<number> = [];
 
-  for (let i = min; i < max; i++) {
+  for (let i = min; i <= max; i++) {
     helperArr[i] = 0;
   }
 
@@ -15,7 +15,7 @@ const countingSort = (arr: Array<number>, min: number, max: number) => {
     helperArr[arr[i]] += 1
   }
 
-  for (let i = min; i < max; i++) {
+  for (let i = 0; i < helperArr.length; i++) {
     while (helperArr[i] > 0) {
       resultArr.push(i);
       helperArr[i] -= 1;
