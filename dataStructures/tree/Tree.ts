@@ -1,3 +1,4 @@
+
 export class TreeNode {
   public data: string;
   public children: Array<TreeNode>;
@@ -49,6 +50,27 @@ export class Tree {
       const node = queue.shift();
       queue.push(...node!.children)
       callback(node)
+    }
+  }
+
+  contains(callback: Function, traversal: Function) {
+    traversal.call(this, callback)
+  }
+
+  add(data: string, toData: string, traversal: Function) {
+    const newNode = new TreeNode(data);
+
+    const cbToAddParent = (node: TreeNode) => {
+      if (node.data === toData) {
+        newNode.parent = node;
+        node.children.push(newNode)
+      }
+    }
+
+    this.contains(cbToAddParent, traversal)
+
+    if (!newNode.parent) {
+      throw new Error('Element does not exists')
     }
   }
 }

@@ -8,7 +8,7 @@ import {Tree, TreeNode } from "./Tree";
  │   └── six
  ├── three
  └── four
- └── seven
+      └── seven
 */
 const tree = new Tree();
 
@@ -55,5 +55,36 @@ describe('Testing Tree functions', () => {
       'seven'
     ])
   })
+
+  it('Contains works good', () => {
+    const cb = jest.fn();
+    const arrOfValues: Array<string> = [];
+    tree.traverseDF((node: TreeNode) => arrOfValues.push(node.data))
+
+    tree.contains(cb, tree.traverseDF);
+
+    expect(cb).toBeCalledTimes(arrOfValues.length)
+  })
+
+  it('Add works good', () => {
+    tree.add('eight', 'seven', tree.traverseBF);
+    let searchNode: TreeNode
+    const search = (node: TreeNode) => {
+      if (node.data === 'seven') {
+        searchNode = node
+      }
+    }
+
+    tree.contains(search, tree.traverseBF)
+
+    expect(searchNode!.children[0].parent?.data).toBe('seven')
+    expect(searchNode!.children[0].data).toBe('eight')
+  })
+
+  it('Add works throws right error', () => {
+    expect(
+      () => tree.add('someData', 'noDataElem', tree.traverseBF)
+    ).toThrowError('Element does not exists');
+  });
 
 });
