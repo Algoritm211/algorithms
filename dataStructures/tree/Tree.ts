@@ -59,6 +59,10 @@ export class Tree {
 
   add(data: string, toData: string, traversal: Function) {
     const newNode = new TreeNode(data);
+    if (this.root === null) {
+      this.root = newNode;
+      return this;
+    }
 
     const cbToAddParent = (node: TreeNode) => {
       if (node.data === toData) {
@@ -72,5 +76,40 @@ export class Tree {
     if (!newNode.parent) {
       throw new Error('Element does not exists')
     }
+
+    return this;
+  }
+
+  remove(data: string, fromData: string, traversal: Function) {
+    if (this.root === null) {
+      return this;
+    }
+    let parentNode: TreeNode | null = null as unknown as TreeNode;
+    let nodeToRemove: TreeNode | null = null as unknown as TreeNode;
+
+    const cbToFindParentToRemove = (node: TreeNode) => {
+      if (node.data === fromData) {
+        parentNode = node
+      }
+
+      if (node.data === data) {
+        nodeToRemove = node
+      }
+    };
+
+    this.contains(cbToFindParentToRemove, traversal);
+
+    if (!parentNode) {
+      throw new Error('Unable to remove from non-existent parent')
+    }
+
+    if (!nodeToRemove) {
+      throw new Error('Unable to remove non-existent element')
+    }
+
+    nodeToRemove.parent = null;
+    parentNode.remove(data);
+
+    return this;
   }
 }

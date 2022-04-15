@@ -87,4 +87,31 @@ describe('Testing Tree functions', () => {
     ).toThrowError('Element does not exists');
   });
 
+  it('Remove function works good', () => {
+    const tree = new Tree()
+    tree
+      .add('one', 'null', tree.traverseBF)
+      .add('two', 'one', tree.traverseBF)
+      .add('three', 'one', tree.traverseBF)
+      .add('four', 'one', tree.traverseBF);
+
+    tree.remove('three', 'one', tree.traverseBF)
+    expect(tree.root?.children.length).toBe(2);
+    expect(tree.root?.children.toString()).toBe('two,four');
+  })
+
+  it('Remove function throws right errors', () => {
+    const tree = new Tree()
+    tree
+      .add('one', 'null', tree.traverseBF)
+      .add('two', 'one', tree.traverseBF);
+
+    expect(
+      () => tree.remove('three', 'one', tree.traverseBF)
+    ).toThrowError('Unable to remove non-existent element')
+
+    expect(
+      () => tree.remove('two', 'five', tree.traverseBF)
+    ).toThrowError('Unable to remove from non-existent parent')
+  });
 });
